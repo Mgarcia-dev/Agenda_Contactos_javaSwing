@@ -16,14 +16,16 @@ import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 
+import controlador.EventHandler;
+
 public class Window extends JFrame{
 
 	// Variables que incluyen todos los elementos de la ventana
-	JButton addButton, editButton, deleteButton;
-	JTable contactTable;
-	DefaultTableModel tableModel;
-	JScrollPane scrollPane;
-	JLabel icon, nameApp,logo;
+	private JButton addButton, editButton, deleteButton;
+	private JTable contactTable;
+	private DefaultTableModel tableModel;
+	private JScrollPane scrollPane;
+	private JLabel nameApp,logo;
 	
 	public Window () {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -32,7 +34,7 @@ public class Window extends JFrame{
 		setBackground(Color.PINK);
 		setResizable(false);
 		setLocationRelativeTo(null);
-		setIconImage(Toolkit.getDefaultToolkit().getImage("smartphone.png"));
+		setIconImage(Toolkit.getDefaultToolkit().getImage("img/contactos.png"));
 		setLayout(null);
 		initComponents();
 		setVisible(true);
@@ -44,20 +46,31 @@ public class Window extends JFrame{
 		getContentPane().setBackground(Color.WHITE);
 		
 		// Añadimos una imagen a la ventana
-		Image img = new ImageIcon("contactos.png").getImage();
+		Image img = new ImageIcon("img/contactos1.png").getImage();
 		logo = new JLabel(new ImageIcon(img.getScaledInstance(100,100, Image.SCALE_SMOOTH)));
 		logo.setBounds(90,70, 100,100);
 		add(logo);
 		
 		// se dimensionan y añaden los componentes
-		addButton = new JButton("Añadir contacto");
-		addButton.setBounds(90, 300, 100, 50);
+		// los botones seran iconos sin texto, sin bordes y sin color de fondo
+		addButton = new JButton();
+		addButton.setBounds(105, 280, 70, 70);
+		addButton.setBackground(null);
+		addButton.setBorder(null);
+		addButton.setIcon(new ImageIcon("img/AnadirAmigo.png"));
 		
-		editButton = new JButton("Editar contactos");
-		editButton.setBounds(90, 450, 100, 50);
+		editButton = new JButton();
+		editButton.setBounds(105, 430, 70, 70);
+		editButton.setBackground(null);
+		editButton.setBorder(null);
+		editButton.setIcon(new ImageIcon("img/EditContact.png"));
 		
-		deleteButton = new JButton("Eliminar contacto");
-		deleteButton.setBounds(90, 600, 100, 50);
+		
+		deleteButton = new JButton();
+		deleteButton.setBounds(105, 580, 70, 70);
+		deleteButton.setBackground(null);
+		deleteButton.setBorder(null);
+		deleteButton.setIcon(new ImageIcon("img/DeleteContact.png"));
 		
 		add(addButton);
 		add(editButton);
@@ -107,5 +120,76 @@ public class Window extends JFrame{
 		
 		
 	}
+	
+	/**
+	 * FFunción que se dedica a la escucha de los botones
+	 * @param handler es el objeto manejador de eventos.
+	 */
+	public void setHandler(EventHandler handler) {
+		
+		addButton.addActionListener(handler);
+		editButton.addActionListener(handler);
+		deleteButton.addActionListener(handler);
+		
+	}
+
+	
+	// Generamos los getter and setters para acceder a los elementos de la ventana porque son privados
+	public JButton getAddButton() {
+		return addButton;
+	}
+
+	public void setAddButton(JButton addButton) {
+		this.addButton = addButton;
+	}
+
+	public JButton getEditButton() {
+		return editButton;
+	}
+
+	public void setEditButton(JButton editButton) {
+		this.editButton = editButton;
+	}
+
+	public JButton getDeleteButton() {
+		return deleteButton;
+	}
+
+	public void setDeleteButton(JButton deleteButton) {
+		this.deleteButton = deleteButton;
+	}
+
+	public JTable getContactTable() {
+		return contactTable;
+	}
+
+	public void setContactTable(JTable contactTable) {
+		this.contactTable = contactTable;
+	}
+
+	public DefaultTableModel getTableModel() {
+		return tableModel;
+	}
+
+	public void setTableModel(DefaultTableModel tableModel) {
+		this.tableModel = tableModel;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }
