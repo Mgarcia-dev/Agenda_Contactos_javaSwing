@@ -76,6 +76,11 @@ public class Window extends JFrame{
 		add(editButton);
 		add(deleteButton);
 		
+		// Ponemos a la escucha los botones
+		addButton.addActionListener(new EventHandler(this));
+		editButton.addActionListener(new EventHandler(this));
+		deleteButton.addActionListener(new EventHandler(this));
+
 		// Añadimos una fuente 
 		try {
 			Font font = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("Antipastol.ttf"));
