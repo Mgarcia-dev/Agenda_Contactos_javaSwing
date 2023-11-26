@@ -27,24 +27,24 @@ public class EventHandler implements ActionListener {
 		window2 = new SecondWindow(this);
 		window2.setTitle("Añadir contacto");
 		window2.setVisible(true);
-		
-		
 	}
 	
+	// Se introduce el nombre y telefono de la ventana secundaria en la tabla de la
+	// ventana principal
 	// Accion al pulsar el botok OK de la ventana secundaria
-	if(e.getSource() == window2.getOkButton()) {
-		
-		if(window2.getNameContent().getText() != "" && window2.getTelContent().getText() != "") {
-		window.getTableModel().addRow(new String [] {window2.getNameContent().getText(), window2.getTelContent().getText()});
-		window2.dispose();
-		
-		} else if (window2.getNameContent().getText().isBlank()) {
-		JOptionPane.showMessageDialog(null, "Nombre de contacto vacío", "Aviso", JOptionPane.INFORMATION_MESSAGE);
-		
-		} else if (window2.getTelContent().getText().isBlank()) {
+		if(e.getSource() == window2.getOkButton()) {
+				
+			if(window2.getNameContent().getText() != "") {
+			window.getTableModel().addRow(new String [] {window2.getNameContent().getText(), window2.getTelContent().getText()});
+			window2.dispose();
+				
+			} else if (window2.getNameContent().getText() == null) {
+			JOptionPane.showMessageDialog(null, "Nombre de contacto vacío", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+			
+			} else if (window2.getTelContent().getText() == null) {
 			JOptionPane.showMessageDialog(null, "Teléfono de contacto vacío", "Aviso", JOptionPane.INFORMATION_MESSAGE);
-	
-		}
+			
+			}
 		}
 
 	
@@ -60,6 +60,8 @@ public class EventHandler implements ActionListener {
 		window2.setVisible(true);
 	}
 	
+	
+	// !!!!!!!!!!!!!!!!!!!!!!!!   DARLE UNA VUELTA AL DELETE PARA SOLUCIONAR FALLO !!!!!!!!!!!!!!!!!!!!!!!!!!!
 	// Funciona (( Meter en try catch para solucionar fallo al no estar seleccionada 
 	// ninguna fila ))
 	if(e.getSource() == window.getDeleteButton()) {
@@ -71,9 +73,7 @@ public class EventHandler implements ActionListener {
 		});
 	}
 	
-	// Se introduce el nombre y telefono de la ventana secundaria en la tabla de la
-	// ventana principal
-		
+	
 	
 	
 	
