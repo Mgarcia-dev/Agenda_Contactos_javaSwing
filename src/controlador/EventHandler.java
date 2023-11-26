@@ -33,14 +33,18 @@ public class EventHandler implements ActionListener {
 	
 	// Acciones a realizar al pulsar el boton editar
 	if(e.getSource() == window.getEditButton()) {
-		window2 = new SecondWindow(this);
-		window2.setTitle("Editar contacto");
+		
 		
 		// La ventana de editar solo aparecerá si hay elementos en la tabla
-		if(window.getTableModel() == null) {
+		if(window.getTableModel().getRowCount() == 0) {
+			
 			window2.setVisible(false);
 		}else {
-		  window2.setVisible(true);
+			window2 = new SecondWindow(this);
+			window2.setTitle("Editar contacto");
+			window2.setVisible(true);
+			
+			window2.setNameContent(window.contactTable.getSelectedRow);
 		  }
 		
 		//ndow.tableModel = (DefaultTableModel) window.contactTable.getModel();
