@@ -5,6 +5,8 @@ import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 
 import javax.swing.ImageIcon;
@@ -75,6 +77,12 @@ public class Window extends JFrame{
 		add(addButton);
 		add(editButton);
 		add(deleteButton);
+		deleteButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				tableModel = (DefaultTableModel) contactTable.getModel();
+				tableModel.removeRow(contactTable.getSelectedRow());
+			}
+		});
 		
 		// Ponemos a la escucha los botones
 		addButton.addActionListener(new EventHandler(this));
@@ -139,6 +147,12 @@ public class Window extends JFrame{
 	}
 
 	
+	
+	
+	
+	
+	
+	
 	// Generamos los getter and setters para acceder a los elementos de la ventana porque son privados
 	public JButton getAddButton() {
 		return addButton;
@@ -179,6 +193,8 @@ public class Window extends JFrame{
 	public void setTableModel(DefaultTableModel tableModel) {
 		this.tableModel = tableModel;
 	}
+
+	
 	
 	
 	

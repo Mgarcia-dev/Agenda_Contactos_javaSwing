@@ -10,7 +10,9 @@ import javax.swing.JDialog;
 
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.border.EmptyBorder;
 
+import controlador.EventHandler;
 
 import javax.swing.JLabel;
 
@@ -21,21 +23,23 @@ public class SecondWindow extends JDialog{
 	private JButton okButton, cancelButton;
 	private JTextField nameContent, telContent;
 	
-	
-	private SecondWindow() {
-		setDefaultCloseOperation(JDialog.EXIT_ON_CLOSE);
+	public SecondWindow(EventHandler eHand) {
+		
 		setBackground(Color.WHITE);
 		setBounds(100,100,400,230);
 		setResizable(false);
-		//getContentPane().setLayout(new BorderLayout());
+		setLocationRelativeTo(null);
+		getContentPane().setLayout(new BorderLayout());
 		getContentPane().add(contentPanel, BorderLayout.CENTER);
+		contentPanel.setBackground(Color.white);
+		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPanel.setLayout(null);
 		initComponents();
 		
 	}
 	
 	private void initComponents() {
-		JButton okButton = new JButton("OK");
+		okButton = new JButton("OK");
 		okButton.setBounds(50, 145, 90, 25);
 		contentPanel.add(okButton);
 		//okButton.addActionListener(new ActionListener() {
@@ -44,7 +48,7 @@ public class SecondWindow extends JDialog{
 		//});
 		
 		// Si pulsamos el botón cancelar, la ventana se cierra
-		JButton cancelButton = new JButton("Cancelar");
+		cancelButton = new JButton("Cancelar");
 		cancelButton.setBounds(220, 145, 90, 25);
 		contentPanel.add(cancelButton);
 		cancelButton.addActionListener(new ActionListener() {
@@ -55,11 +59,11 @@ public class SecondWindow extends JDialog{
 		
 		
 		name = new JLabel("Nombre: ");
-		name.setBounds(60, 50, 60, 14);
+		name.setBounds(60, 50, 60, 15);
 		contentPanel.add(name);
 		
 		telNumber = new JLabel("Teléfono:");
-		telNumber.setBounds(60, 100, 46, 14);
+		telNumber.setBounds(60, 100, 60, 15);
 		contentPanel.add(telNumber);
 		
 		nameContent = new JTextField();
