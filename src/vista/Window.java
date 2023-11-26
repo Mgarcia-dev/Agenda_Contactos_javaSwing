@@ -76,7 +76,6 @@ public class Window extends JFrame{
 		editButton.setBorder(null);
 		editButton.setIcon(new ImageIcon("img/EditContact.png"));
 		editButton.addActionListener(eHand);
-
 		
 		deleteButton = new JButton();
 		deleteButton.setBounds(105, 580, 70, 70);
@@ -96,12 +95,6 @@ public class Window extends JFrame{
 		add(editButton);
 		add(deleteButton);
 		
-		
-		// Ponemos a la escucha los botones
-		//addButton.addActionListener(new EventHandler(this));
-		//editButton.addActionListener(new EventHandler(this));
-		//deleteButton.addActionListener(new EventHandler(this));
-
 		// Añadimos una fuente 
 		try {
 			Font font = Font.createFont(Font.TRUETYPE_FONT, getClass().getResourceAsStream("Antipastol.ttf"));
@@ -174,13 +167,6 @@ public class Window extends JFrame{
 		
 	}
 
-	
-	
-	
-	
-	
-	
-	
 	// Generamos los getter and setters para acceder a los elementos de la ventana porque son privados
 	public JButton getAddButton() {
 		return addButton;

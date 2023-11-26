@@ -67,6 +67,13 @@ public class SecondWindow extends JDialog{
 		contentPanel.add(telContent);
 	}
 	
+	public void setlisteners (EventHandler eHand) {
+		okButton.addActionListener(eHand);
+		
+	}
+	
+	
+	
 	public JButton getOkButton() {
 		return okButton;
 	}
