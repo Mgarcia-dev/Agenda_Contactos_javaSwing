@@ -13,6 +13,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
@@ -23,11 +26,16 @@ import controlador.EventHandler;
 public class Window extends JFrame{
 
 	// Variables que incluyen todos los elementos de la ventana
-	private JButton addButton, editButton, deleteButton;
-	private JTable contactTable;
-	private DefaultTableModel tableModel;
+	private JButton addButton, editButton;
+	public JButton deleteButton;
+	public JTable contactTable;
+	public DefaultTableModel tableModel;
 	private JScrollPane scrollPane;
 	private JLabel nameApp,logo;
+	private JMenuBar bar;
+	private JMenu fileMenu;
+	private JMenuItem open, save;
+	private EventHandler eHand;
 	
 	public Window () {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -60,34 +68,39 @@ public class Window extends JFrame{
 		addButton.setBackground(null);
 		addButton.setBorder(null);
 		addButton.setIcon(new ImageIcon("img/AnadirAmigo.png"));
+		addButton.addActionListener(eHand);
 		
 		editButton = new JButton();
 		editButton.setBounds(105, 430, 70, 70);
 		editButton.setBackground(null);
 		editButton.setBorder(null);
 		editButton.setIcon(new ImageIcon("img/EditContact.png"));
-		
+		editButton.addActionListener(eHand);
+
 		
 		deleteButton = new JButton();
 		deleteButton.setBounds(105, 580, 70, 70);
 		deleteButton.setBackground(null);
 		deleteButton.setBorder(null);
 		deleteButton.setIcon(new ImageIcon("img/DeleteContact.png"));
+		deleteButton.addActionListener(eHand);
 		
-		add(addButton);
-		add(editButton);
-		add(deleteButton);
-		deleteButton.addActionListener(new ActionListener() {
+		/*deleteButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				tableModel = (DefaultTableModel) contactTable.getModel();
 				tableModel.removeRow(contactTable.getSelectedRow());
 			}
 		});
+		*/
+		add(addButton);
+		add(editButton);
+		add(deleteButton);
+		
 		
 		// Ponemos a la escucha los botones
-		addButton.addActionListener(new EventHandler(this));
-		editButton.addActionListener(new EventHandler(this));
-		deleteButton.addActionListener(new EventHandler(this));
+		//addButton.addActionListener(new EventHandler(this));
+		//editButton.addActionListener(new EventHandler(this));
+		//deleteButton.addActionListener(new EventHandler(this));
 
 		// Añadimos una fuente 
 		try {
@@ -132,7 +145,22 @@ public class Window extends JFrame{
 		add(scrollPane);
 		
 		
+		
+		// Añadimos una barra de menu opcional **** 
+		bar = new JMenuBar();
+		bar.setBounds(0, 0, 900, 25);
+		add(bar);
+		
+		fileMenu = new JMenu("Archivo");
+		bar.add(fileMenu);
+		
+		open = new JMenuItem("Abrir");
+		save = new JMenuItem("Guardar");
+		
+		fileMenu.add(open);
+		fileMenu.add(save);
 	}
+	
 	
 	/**
 	 * FFunción que se dedica a la escucha de los botones

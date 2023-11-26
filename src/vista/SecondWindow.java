@@ -22,8 +22,10 @@ public class SecondWindow extends JDialog{
 	private JLabel name, telNumber;
 	private JButton okButton, cancelButton;
 	private JTextField nameContent, telContent;
+	private EventHandler eHand;
 	
 	public SecondWindow(EventHandler eHand) {
+		this.eHand = eHand;
 		
 		setBackground(Color.WHITE);
 		setBounds(100,100,400,230);
@@ -34,34 +36,25 @@ public class SecondWindow extends JDialog{
 		contentPanel.setBackground(Color.white);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPanel.setLayout(null);
-		initComponents();
 		
-	}
-	
-	private void initComponents() {
+		// Se añade el Boton OK a la ventana y el controlador del botón
+		// Si pulsamos OK, los datos se añaden a la tabla
 		okButton = new JButton("OK");
 		okButton.setBounds(50, 145, 90, 25);
+		okButton.addActionListener(eHand); 
 		contentPanel.add(okButton);
-		//okButton.addActionListener(new ActionListener() {
-		//	public void actionPerformed(ActionEvent e) {
-		//	}
-		//});
 		
-		// Si pulsamos el botón cancelar, la ventana se cierra
+		// Añadimos el boton Cancelar y su controlador.
+		// Si pulsamos el botón cancelar, la ventana se cierra ( HECHO ) 
 		cancelButton = new JButton("Cancelar");
 		cancelButton.setBounds(220, 145, 90, 25);
+		cancelButton.addActionListener(eHand);
 		contentPanel.add(cancelButton);
-		cancelButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				dispose();
-			}
-		});
-		
 		
 		name = new JLabel("Nombre: ");
 		name.setBounds(60, 50, 60, 15);
 		contentPanel.add(name);
-		
+			
 		telNumber = new JLabel("Teléfono:");
 		telNumber.setBounds(60, 100, 60, 15);
 		contentPanel.add(telNumber);
@@ -70,12 +63,11 @@ public class SecondWindow extends JDialog{
 		nameContent.setBounds(130, 50, 150, 20);
 		contentPanel.add(nameContent);
 		
-		
 		telContent = new JTextField();
 		telContent.setBounds(130, 100, 150, 20);
 		contentPanel.add(telContent);
 	}
-
+	
 	public JButton getOkButton() {
 		return okButton;
 	}
