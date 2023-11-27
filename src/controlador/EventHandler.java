@@ -21,8 +21,9 @@ public class EventHandler implements ActionListener {
 	}
 	
 	@Override
-	public void actionPerformed(ActionEvent e) {
+	public void actionPerformed(ActionEvent e) throws ArrayIndexOutOfBoundsException {
 
+	
 	if(e.getSource() == window.getAddButton()) {
 		window2 = new SecondWindow(this);
 		window2.setTitle("Añadir contacto");
@@ -30,7 +31,7 @@ public class EventHandler implements ActionListener {
 	}
 	
 	
-	
+	try {
 	// Acciones a realizar al pulsar el boton editar
 	if(e.getSource() == window.getEditButton()) {
 		
@@ -40,16 +41,25 @@ public class EventHandler implements ActionListener {
 			
 			window2.setVisible(false);
 		}else {
+			window.getTableModel().getValueAt(window.getContactTable().getSelectedRow(), window.getContactTable().getSelectedRow());
+			window2.getNameContent().getText();
 			window2 = new SecondWindow(this);
 			window2.setTitle("Editar contacto");
 			window2.setVisible(true);
+		}
+	}
+	
+	} catch (ArrayIndexOutOfBoundsException ioe) {
+		ioe.printStackTrace();
+	}
 			
-			window2.setNameContent(window.contactTable.getSelectedRow);
-		  }
+			
+			//window2.setNameContent(window.contactTable.getColumnName(window.contactTable.getSelectedColumn()));
+		  
 		
 		//ndow.tableModel = (DefaultTableModel) window.contactTable.getModel();
 
-	}
+	
 	
 	// !!!!!!!!!!!!!!!!!!!!!!!!   DARLE UNA VUELTA AL DELETE PARA SOLUCIONAR FALLO !!!!!!!!!!!!!!!!!!!!!!!!!!!
 	// Funciona (( Meter en try catch para solucionar fallo al no estar seleccionada 
