@@ -47,32 +47,38 @@ public class EventHandler implements ActionListener {
 		// contacto seleccionado
 		// 3.- Si hay contactos en la lista y seleccionamos un contacto, la ventana se abrirá para editar el 
 		// contacto seleccionado
-	try {
+	//try {
 		if(e.getSource() == window.getEditButton()) {
-			
-			window3 = new EditWindow(this);
-			// La ventana de editar solo aparecerá si hay elementos en la tabla
-			if(window.getTableModel().getRowCount() == 0) {
-				
-				JOptionPane.showMessageDialog(window, "No hay contactos para editar", "Aviso", JOptionPane.INFORMATION_MESSAGE);
-				window3.setVisible(false);
-				
-			}if  (window.contactTable.getSelectedRow() == -1){
-				JOptionPane.showMessageDialog(window, "Por favor, selecciona un contacto", "Aviso", JOptionPane.INFORMATION_MESSAGE);
-				window3.setVisible(false);
-			}else {
-				
-				window3.setTitle("Editar contacto");
-				window3.setVisible(true);
-				//window3.getNameContent((String) window.tableModel.getValueAt(window.contactTable.getSelectedRow(), 0));
+			try {
+				window3 = new EditWindow(this);
+				// La ventana de editar solo aparecerá si hay elementos en la tabla
+				//if (window.getTableModel().getRowCount() == 0) {
+					//JOptionPane.showMessageDialog(window, "No hay contactos para editar", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+					//window3.setVisible(false);
+					
+				//}
+			if (window.contactTable.getSelectedRow() == -1 && window.getTableModel().getRowCount() == 0){
+					JOptionPane.showMessageDialog(window, "No hay contactos para editar", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+					window3.setVisible(false);
+					
+				}else if (window.contactTable.getSelectedRow() == -1 && window.getTableModel().getRowCount() >= 0) {
+					JOptionPane.showMessageDialog(window, "Por favor, selecciona un contacto para editar", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+					window3.setVisible(false);
+					
+				}else{
+					
+					window3.setTitle("Editar contacto");
+					window3.setVisible(true);
+					//window3.getNameContent((String) window.tableModel.getValueAt(window.contactTable.getSelectedRow(), 0));
+			}
+			} catch (ArrayIndexOutOfBoundsException ioe) {
+				ioe.printStackTrace();
+			} catch(NullPointerException npe) {
+				npe.printStackTrace();
 			}
 		}
 	
-	} catch (ArrayIndexOutOfBoundsException ioe) {
-		ioe.printStackTrace();
-	} catch(NullPointerException npe) {
-		npe.printStackTrace();
-	}
+	
 			
 			
 	
@@ -82,11 +88,11 @@ public class EventHandler implements ActionListener {
 	// 3.- El contacto seleccionado se borra.
 	if(e.getSource() == window.getDeleteButton()) {
 		try {
-			if (window.tableModel.getRowCount() == 0) {
+			if (window.contactTable.getSelectedRow() == -1 && window.getTableModel().getRowCount() == 0) { //(window.tableModel.getRowCount() == 0 ) {
 				JOptionPane.showMessageDialog(window, "No hay datos para borrar", "Aviso", JOptionPane.INFORMATION_MESSAGE);
 				
-			} if  (window.contactTable.getSelectedRow() == -1){
-				JOptionPane.showMessageDialog(window, "Por favor, selecciona un contacto", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+			} if  (window.contactTable.getSelectedRow() == -1 && window.getTableModel().getRowCount() > 0){
+				JOptionPane.showMessageDialog(window, "Por favor, selecciona un contacto para eliminar", "Aviso", JOptionPane.INFORMATION_MESSAGE);
 			
 			} else if (window.tableModel.getRowCount() >= 0){
 						
