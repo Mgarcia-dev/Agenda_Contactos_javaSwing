@@ -38,6 +38,7 @@ public class Window extends JFrame{
 	private EventHandler eHand;
 	
 	public Window () {
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setSize(900,800);
 		setTitle("Mi agenda");
@@ -84,13 +85,7 @@ public class Window extends JFrame{
 		deleteButton.setIcon(new ImageIcon("img/DeleteContact.png"));
 		deleteButton.addActionListener(eHand);
 		
-		/*deleteButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				tableModel = (DefaultTableModel) contactTable.getModel();
-				tableModel.removeRow(contactTable.getSelectedRow());
-			}
-		});
-		*/
+		
 		add(addButton);
 		add(editButton);
 		add(deleteButton);

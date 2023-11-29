@@ -96,10 +96,6 @@ public class EditWindow extends JDialog {
 	public void setTelContent(JTextField telContent) {
 		this.telContent = telContent;
 	}
-		
-		
-		
-		
-	}
+}
 
 
