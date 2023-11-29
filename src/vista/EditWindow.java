@@ -2,20 +2,17 @@ package vista;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Window;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
-
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import controlador.EventHandler;
 
-import javax.swing.JLabel;
-
-public class SecondWindow extends JDialog{
+public class EditWindow extends JDialog {
 	
 	private final JPanel contentPanel = new JPanel();
 	private JLabel name, telNumber;
@@ -23,7 +20,7 @@ public class SecondWindow extends JDialog{
 	private JTextField nameContent, telContent;
 	private EventHandler eHand;
 	
-	public SecondWindow(EventHandler eHand) {
+	public EditWindow(EventHandler eHand) {
 		this.eHand = eHand;
 		
 		setBackground(Color.WHITE);
@@ -67,18 +64,7 @@ public class SecondWindow extends JDialog{
 		telContent.setBounds(130, 100, 150, 20);
 		contentPanel.add(telContent);
 	}
-	
 
-
-	public JLabel getTelNumber() {
-		return telNumber;
-	}
-
-	public void setlisteners (EventHandler eHand) {
-		okButton.addActionListener(eHand);
-		
-	}
-	
 	public JButton getOkButton() {
 		return okButton;
 	}
@@ -110,12 +96,10 @@ public class SecondWindow extends JDialog{
 	public void setTelContent(JTextField telContent) {
 		this.telContent = telContent;
 	}
+		
+		
+		
+		
+	}
 
-	public void getNameContent(String columnName) {
-		
-		
-	}
-		
-	
-	}
 
