@@ -2,7 +2,6 @@ package vista;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Window;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;

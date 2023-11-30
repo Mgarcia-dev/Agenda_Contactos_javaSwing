@@ -3,6 +3,8 @@ package vista;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Window;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
@@ -43,7 +45,8 @@ public class SecondWindow extends JDialog{
 	}
 		
 		
-		private void initVars() {
+	
+	private void initVars() {
 		// Se añade el Boton OK a la ventana y el controlador del botón
 		// Si pulsamos OK, los datos se añaden a la tabla
 		okButton = new JButton("OK");
@@ -73,8 +76,20 @@ public class SecondWindow extends JDialog{
 		
 		telContent = new JTextField();
 		telContent.setBounds(130, 100, 150, 20);
-		contentPanel.add(telContent);
+		telContent.addKeyListener(new KeyAdapter() {
 		
+			public void KeyTyped(KeyEvent e) {
+				int key = e.getKeyChar();
+				boolean number = key >= 48 && key <=57;
+				
+				if(!number) {
+					e.consume();
+				} else if (telContent.getText().length() >=9) {
+					e.consume();
+				}
+			}
+		});
+		contentPanel.add(telContent);
 	}
 	
 	
@@ -125,12 +140,5 @@ public class SecondWindow extends JDialog{
 		
 		
 	}
-	/*	
-	public void getNameToEdit(String name, String tel) {
-		nameContent.setText(name);
-		telContent.setText(tel);
-		
-	}
-	*/
-	}
+}
 

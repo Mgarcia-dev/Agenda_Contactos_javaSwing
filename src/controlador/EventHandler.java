@@ -34,7 +34,8 @@ public class EventHandler implements ActionListener {
 		
 	// Si le damos al botón añadir contacto, se abre una segunda ventana asociada al controlador
 	// para introducir el nombre y el telefono de contacto.
-	if(e.getSource() == window.getAddButton()) {
+	if(e.getSource() == window.getAddButton()
+			) {
 		window2 = new SecondWindow(this);
 		window2.setTitle("Añadir contacto");
 		window2.setVisible(true);
@@ -121,8 +122,10 @@ public class EventHandler implements ActionListener {
 				JOptionPane.showMessageDialog(window, "Los datos del contacto están vacíos", "Aviso", JOptionPane.INFORMATION_MESSAGE);
 					
 			} else if (window2.getTelContent().getText().isEmpty()) {
-			JOptionPane.showMessageDialog(window, "Teléfono de contacto vacío", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(window, "Teléfono de contacto vacío", "Aviso", JOptionPane.INFORMATION_MESSAGE);
 				
+			} else if (window2.getTelContent().getText().length() < 9) {
+				JOptionPane.showMessageDialog(window, "El teléfono debe contener 9 caracteres numéricos", "Aviso", JOptionPane.INFORMATION_MESSAGE);
 				
 					
 			}else if(window2.getNameContent().getText().isEmpty()) {
@@ -152,11 +155,15 @@ public class EventHandler implements ActionListener {
 				JOptionPane.showMessageDialog(window, "Los datos del contacto están vacíos", "Aviso", JOptionPane.INFORMATION_MESSAGE);
 					
 			} else if (window3.getTelContent().getText().isEmpty()) {
-			JOptionPane.showMessageDialog(window, "Teléfono de contacto vacío", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(window, "Teléfono de contacto vacío", "Aviso", JOptionPane.INFORMATION_MESSAGE);
 					
 			}else if(window3.getNameContent().getText().isEmpty()) {
 				JOptionPane.showMessageDialog(window, "Nombre de contacto vacío", "Aviso", JOptionPane.INFORMATION_MESSAGE);
 					
+			} else if (window3.getTelContent().getText().length() < 9) {
+				JOptionPane.showMessageDialog(window, "El teléfono debe contener 9 caracteres numéricos", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+				
+				
 			} else if (window3.getNameContent().getText() != "" && window3.getTelContent().getText() != "") {
 				
 				DefaultTableModel tableModel = window.getTableModel();

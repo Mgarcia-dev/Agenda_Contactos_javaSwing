@@ -36,7 +36,6 @@ public class Window extends JFrame{
 	private JMenu fileMenu;
 	private JMenuItem open, save;
 	private EventHandler eHand;
-	private int selectedRow = -1;
 	
 	public Window () {
 		
@@ -65,22 +64,22 @@ public class Window extends JFrame{
 		
 		// se dimensionan y añaden los componentes
 		// los botones seran iconos sin texto, sin bordes y sin color de fondo
-		addButton = new JButton();
-		addButton.setBounds(105, 280, 70, 70);
+		addButton = new JButton("  Añadir contacto");
+		addButton.setBounds(60, 280, 170, 70);
 		addButton.setBackground(null);
 		addButton.setBorder(null);
 		addButton.setIcon(new ImageIcon("img/AnadirAmigo.png"));
 		addButton.addActionListener(eHand);
 		
-		editButton = new JButton();
-		editButton.setBounds(105, 430, 70, 70);
+		editButton = new JButton("  Editar contacto");
+		editButton.setBounds(60, 430, 170, 70);
 		editButton.setBackground(null);
 		editButton.setBorder(null);
 		editButton.setIcon(new ImageIcon("img/EditContact.png"));
 		editButton.addActionListener(eHand);
 		
-		deleteButton = new JButton();
-		deleteButton.setBounds(105, 580, 70, 70);
+		deleteButton = new JButton("  Borrar contacto");
+		deleteButton.setBounds(60, 580, 170, 70);
 		deleteButton.setBackground(null);
 		deleteButton.setBorder(null);
 		deleteButton.setIcon(new ImageIcon("img/DeleteContact.png"));
@@ -138,7 +137,7 @@ public class Window extends JFrame{
 		
 		contactTable = new JTable(tableModel);
 		scrollPane = new JScrollPane(contactTable);
-		scrollPane.setBounds(260, 170, 550, 500);
+		scrollPane.setBounds(260, 190, 550, 500);
 		add(scrollPane);
 		
 		
@@ -171,12 +170,6 @@ public class Window extends JFrame{
 		editButton.addActionListener(handler);
 		deleteButton.addActionListener(handler);
 		
-	}
-	
-	public void updateRow(String name, String tel ) {
-		tableModel.setValueAt(name, selectedRow, 0);
-		tableModel.setValueAt(tel, selectedRow, 1);
-		selectedRow = -1;
 	}
 
 	// Generamos los getter and setters para acceder a los elementos de la ventana porque son privados
