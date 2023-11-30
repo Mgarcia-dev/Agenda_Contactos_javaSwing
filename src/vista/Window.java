@@ -127,7 +127,9 @@ public class Window extends JFrame{
 		// es 0 porque se van a ir creando conforme se vayan añadiendo datos
 		tableModel = new DefaultTableModel(columNames, 0) {
 			
-			// Agregamos este método para que las filas no se puedan editar con doble clic
+			/** 
+			 * Método por el cual las filas no se podrán edtar en la pantalla mediante doble clic
+			 */
 			public boolean isCellEditable(int row, int column) {
 				return false; 
 			}
@@ -139,12 +141,13 @@ public class Window extends JFrame{
 		add(scrollPane);
 		
 		
-		
 		// Añadimos una barra de menu opcional **** 
 		bar = new JMenuBar();
 		bar.setBounds(0, 0, 900, 25);
 		add(bar);
 		
+		
+		// El menú no tiene funcionalidad
 		fileMenu = new JMenu("Archivo");
 		bar.add(fileMenu);
 		
@@ -153,7 +156,6 @@ public class Window extends JFrame{
 		
 		fileMenu.add(open);
 		fileMenu.add(save);
-		
 		
 	}
 	

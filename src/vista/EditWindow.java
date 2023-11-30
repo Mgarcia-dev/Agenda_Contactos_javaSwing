@@ -21,11 +21,9 @@ public class EditWindow extends JDialog{
 	private JButton okButton, cancelButton;
 	private JTextField nameContent, telContent;
 	private EventHandler eHand;
-	
 
 
-
-
+// Constructor de la clase
 	public EditWindow(EventHandler eHand) {
 		this.eHand = eHand;
 		
@@ -41,7 +39,9 @@ public class EditWindow extends JDialog{
 		initVars();
 	}
 		
-		
+		/**
+		 * Método para inicializar variables
+		 */
 		private void initVars() {
 		// Se añade el Boton OK a la ventana y el controlador del botón
 		// Si pulsamos OK, los datos se añaden a la tabla
@@ -120,12 +120,8 @@ public class EditWindow extends JDialog{
 		this.telContent = telContent;
 	}
 
-	public void getNameContent(String columnName) {
-		
-		
-	}
-
-
+	
+	
 	public void getNameToEdit(String name, String tel) {
 	nameContent.setText(name);
 	telContent.setText(tel);

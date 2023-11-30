@@ -24,10 +24,7 @@ public class SecondWindow extends JDialog{
 	private JTextField nameContent, telContent;
 	private EventHandler eHand;
 	
-
-
-
-
+	// Constructor de la clase
 	public SecondWindow(EventHandler eHand) {
 		this.eHand = eHand;
 		
@@ -44,7 +41,9 @@ public class SecondWindow extends JDialog{
 	}
 		
 		
-	
+	/**
+	 * Método para inicializar variables
+	 */
 	private void initVars() {
 		// Se añade el Boton OK a la ventana y el controlador del botón
 		// Si pulsamos OK, los datos se añaden a la tabla
@@ -75,34 +74,16 @@ public class SecondWindow extends JDialog{
 		
 		telContent = new JTextField();
 		telContent.setBounds(130, 100, 150, 20);
-		telContent.addKeyListener(new KeyAdapter() {
-		
-			public void KeyTyped(KeyEvent e) {
-				int key = e.getKeyChar();
-				boolean number = key >= 48 && key <=57;
-				
-				if(!number) {
-					e.consume();
-				} else if (telContent.getText().length() >=9) {
-					e.consume();
-				}
-			}
-		});
 		contentPanel.add(telContent);
 	}
 	
 	
 
-
+	// Getter y setters para acceder a los elementos de la clase
 	public JLabel getTelNumber() {
 		return telNumber;
 	}
 
-	public void setlisteners (EventHandler eHand) {
-		okButton.addActionListener(eHand);
-		
-	}
-	
 	public JButton getOkButton() {
 		return okButton;
 	}
@@ -135,9 +116,6 @@ public class SecondWindow extends JDialog{
 		this.telContent = telContent;
 	}
 
-	public void getNameContent(String columnName) {
-		
-		
-	}
+	
 }
 

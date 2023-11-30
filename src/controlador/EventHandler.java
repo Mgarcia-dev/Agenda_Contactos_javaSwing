@@ -34,8 +34,7 @@ public class EventHandler implements ActionListener {
 		
 	// Si le damos al botón añadir contacto, se abre una segunda ventana asociada al controlador
 	// para introducir el nombre y el telefono de contacto.
-	if(e.getSource() == window.getAddButton()
-			) {
+	if(e.getSource() == window.getAddButton()) {
 		window2 = new SecondWindow(this);
 		window2.setTitle("Añadir contacto");
 		window2.setVisible(true);
@@ -50,14 +49,12 @@ public class EventHandler implements ActionListener {
 		// contacto seleccionado
 		// 3.- Si hay contactos en la lista y seleccionamos un contacto, la ventana se abrirá para editar el 
 		// contacto seleccionado
-	//try {
+	
 		if(e.getSource() == window.getEditButton()) {
 			window3 = new EditWindow(this);
-			try {
-				int selectedRow = window.contactTable.getSelectedRow();
-				
-				
-				
+			
+			int selectedRow = window.contactTable.getSelectedRow();
+					
 			if (window.contactTable.getSelectedRow() == -1 && window.getTableModel().getRowCount() == 0){
 				JOptionPane.showMessageDialog(window, "No hay contactos para editar", "Aviso", JOptionPane.INFORMATION_MESSAGE);
 				window3.setVisible(false);
@@ -70,14 +67,7 @@ public class EventHandler implements ActionListener {
 				window3.setTitle("Editar contacto");
 				window3.getNameToEdit(window.tableModel.getValueAt(selectedRow, 0).toString(), window.tableModel.getValueAt(selectedRow, 1).toString());
 				window3.setVisible(true);
-				
 				}
-			} catch (ArrayIndexOutOfBoundsException ioe) {
-				ioe.printStackTrace();
-			} catch(NullPointerException npe) {
-				npe.printStackTrace();
-			}
-			
 		}
 	
 	
@@ -85,9 +75,9 @@ public class EventHandler implements ActionListener {
 	// 1.- Si no hay contactos en la lista, devuelve un mensaje de aviso al no haber datos en la lista
 	// 2.- Si no hay ningun contacto seleccionado, nos salta un aviso de que debemos seleccionar un contacto
 	// 3.- El contacto seleccionado se borra.
-	if(e.getSource() == window.getDeleteButton()) {
+		if(e.getSource() == window.getDeleteButton()) {
 		
-		try {
+		
 			if (window.contactTable.getSelectedRow() == -1 && window.getTableModel().getRowCount() == 0) { //(window.tableModel.getRowCount() == 0 ) {
 				JOptionPane.showMessageDialog(window, "No hay datos para borrar", "Aviso", JOptionPane.INFORMATION_MESSAGE);
 				
@@ -99,13 +89,8 @@ public class EventHandler implements ActionListener {
 				window.tableModel = (DefaultTableModel) window.contactTable.getModel();
 				window.tableModel.removeRow(window.contactTable.getSelectedRow());
 			}
-		}catch (IndexOutOfBoundsException ie) {
-			ie.printStackTrace();
-					
-		} catch (NullPointerException npe) {
-			npe.printStackTrace();
-		} 
-	}
+		
+		}
 		
 		
 		
@@ -115,9 +100,9 @@ public class EventHandler implements ActionListener {
 	// Se introduce el nombre y telefono de la ventana secundaria en la tabla de la
 		// ventana principal
 		// Accion al pulsar el botok OK de la ventana secundaria
-	if(window2 != null && e.getSource() == window2.getOkButton()) {
+		if(window2 != null && e.getSource() == window2.getOkButton()) {
 		
-		try {
+		
 			if (window2.getNameContent().getText().isEmpty() && window2.getTelContent().getText().isEmpty()) {
 				JOptionPane.showMessageDialog(window, "Los datos del contacto están vacíos", "Aviso", JOptionPane.INFORMATION_MESSAGE);
 					
@@ -135,22 +120,21 @@ public class EventHandler implements ActionListener {
 				window.getTableModel().addRow(new String [] {window2.getNameContent().getText(), window2.getTelContent().getText()});
 				window2.dispose();
 			} 
-		} catch (NullPointerException npe) {
-			npe.printStackTrace();
+		
 		}
-	}
 	
 	// Si pulsamos cancelar, la ventana se cierra
-			if(window2 != null && e.getSource() == window2.getCancelButton()) {
-				window2.dispose();
-			}
+		if(window2 != null && e.getSource() == window2.getCancelButton()) {
+			window2.dispose();
+		}
 	
 			
-	if(window3 != null && e.getSource() == window3.getOkButton()) {
+		if(window3 != null && e.getSource() == window3.getOkButton()) {
 		int selectedRow = window.contactTable.getSelectedRow();
 		String editName = window3.getNameContent().getText();
 		String editTelNumber = window3.getTelContent().getText();
-		try {
+		
+		
 			if (window3.getNameContent().getText().isEmpty() && window3.getTelContent().getText().isEmpty()) {
 				JOptionPane.showMessageDialog(window, "Los datos del contacto están vacíos", "Aviso", JOptionPane.INFORMATION_MESSAGE);
 					
@@ -171,18 +155,12 @@ public class EventHandler implements ActionListener {
 				tableModel.setValueAt(editName, selectedRow, 0);
 				tableModel.setValueAt(editTelNumber, selectedRow, 1);
 				
-				
 				window3.getNameContent().setText(null);
 				window3.getTelContent().setText(null);
-				
-				//window.contactTable.getSelectedRow();
-				//window.updateRow(window3.getNameContent().getText(), window3.getTelContent().getText());
 				window3.dispose();
 			} 
-		} catch (NullPointerException npe) {
-			npe.printStackTrace();
+		
 		}
-	}
 	
 		
 		if(window3 != null && e.getSource() == window3.getCancelButton()) {
