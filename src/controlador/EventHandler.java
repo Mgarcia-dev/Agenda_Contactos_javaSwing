@@ -24,13 +24,14 @@ public class EventHandler implements ActionListener {
 	// Constructor de la clase
 	public EventHandler(Window window) {
 		this.window = window;
-		
 	}
 	
 	
 	@Override
-	public void actionPerformed(ActionEvent e) throws ArrayIndexOutOfBoundsException {
-
+	public void actionPerformed(ActionEvent e) {
+		
+		
+		
 	// Si le damos al botón añadir contacto, se abre una segunda ventana asociada al controlador
 	// para introducir el nombre y el telefono de contacto.
 	if(e.getSource() == window.getAddButton()) {
@@ -53,8 +54,6 @@ public class EventHandler implements ActionListener {
 			window3 = new EditWindow(this);
 			try {
 				int selectedRow = window.contactTable.getSelectedRow();
-				//String nameEdited = window3.getNameContent().getText();
-				//String telEdited = window3.getTelContent().getText();
 				
 				
 				
@@ -71,20 +70,13 @@ public class EventHandler implements ActionListener {
 				window3.getNameToEdit(window.tableModel.getValueAt(selectedRow, 0).toString(), window.tableModel.getValueAt(selectedRow, 1).toString());
 				window3.setVisible(true);
 				
-					//DefaultTableModel tableModel = window.getTableModel();
-					//tableModel = window.getTableModel();
-					//tableModel.setValueAt(nameEdited, rowSelected, 0);
-					//tableModel.setValueAt(telEdited, rowSelected, 1);
-					
-					
-					//window3.getNameContent((String) window.tableModel.getValueAt(window.contactTable.getSelectedColumn(), 0));
-					
 				}
 			} catch (ArrayIndexOutOfBoundsException ioe) {
 				ioe.printStackTrace();
 			} catch(NullPointerException npe) {
 				npe.printStackTrace();
 			}
+			
 		}
 	
 	
@@ -122,7 +114,8 @@ public class EventHandler implements ActionListener {
 	// Se introduce el nombre y telefono de la ventana secundaria en la tabla de la
 		// ventana principal
 		// Accion al pulsar el botok OK de la ventana secundaria
-	if(e.getSource() == window2.getOkButton()) {
+	if(window2 != null && e.getSource() == window2.getOkButton()) {
+		
 		try {
 			if (window2.getNameContent().getText().isEmpty() && window2.getTelContent().getText().isEmpty()) {
 				JOptionPane.showMessageDialog(window, "Los datos del contacto están vacíos", "Aviso", JOptionPane.INFORMATION_MESSAGE);
@@ -145,14 +138,15 @@ public class EventHandler implements ActionListener {
 	}
 	
 	// Si pulsamos cancelar, la ventana se cierra
-			if(e.getSource() == window2.getCancelButton()) {
+			if(window2 != null && e.getSource() == window2.getCancelButton()) {
 				window2.dispose();
 			}
 	
 			
-			
-	if(e.getSource() == window3.getOkButton()) {
-		
+	if(window3 != null && e.getSource() == window3.getOkButton()) {
+		int selectedRow = window.contactTable.getSelectedRow();
+		String editName = window3.getNameContent().getText();
+		String editTelNumber = window3.getTelContent().getText();
 		try {
 			if (window3.getNameContent().getText().isEmpty() && window3.getTelContent().getText().isEmpty()) {
 				JOptionPane.showMessageDialog(window, "Los datos del contacto están vacíos", "Aviso", JOptionPane.INFORMATION_MESSAGE);
@@ -164,8 +158,18 @@ public class EventHandler implements ActionListener {
 				JOptionPane.showMessageDialog(window, "Nombre de contacto vacío", "Aviso", JOptionPane.INFORMATION_MESSAGE);
 					
 			} else if (window3.getNameContent().getText() != "" && window3.getTelContent().getText() != "") {
-				window.contactTable.getSelectedRow(window3.getNameContent().getText());
-				window.updateRow(window3.getNameContent().getText(), window3.getTelContent().getText());
+				
+				DefaultTableModel tableModel = window.getTableModel();
+				tableModel= window.getTableModel();
+				tableModel.setValueAt(editName, selectedRow, 0);
+				tableModel.setValueAt(editTelNumber, selectedRow, 1);
+				
+				
+				window3.getNameContent().setText(null);
+				window3.getTelContent().setText(null);
+				
+				//window.contactTable.getSelectedRow();
+				//window.updateRow(window3.getNameContent().getText(), window3.getTelContent().getText());
 				window3.dispose();
 			} 
 		} catch (NullPointerException npe) {
@@ -174,7 +178,7 @@ public class EventHandler implements ActionListener {
 	}
 	
 		
-		if(e.getSource() == window3.getCancelButton()) {
+		if(window3 != null && e.getSource() == window3.getCancelButton()) {
 			window3.dispose();
 		}
 	}
