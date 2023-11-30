@@ -5,8 +5,6 @@ import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.Image;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.IOException;
 
 import javax.swing.ImageIcon;
