@@ -36,6 +36,7 @@ public class Window extends JFrame{
 	private JMenu fileMenu;
 	private JMenuItem open, save;
 	private EventHandler eHand;
+	private int selectedRow = -1;
 	
 	public Window () {
 		
@@ -123,9 +124,17 @@ public class Window extends JFrame{
 		//añadimos el nombre de las dos columnas que van a componer la tabla
 		String[] columNames = {"Nombre" , "Teléfono"};
 		
+		
+		
 		// Se añaden las columnas a la tabla con el numero de filas. En este momento
 		// es 0 porque se van a ir creando conforme se vayan añadiendo datos
-		tableModel = new DefaultTableModel(columNames, 0);
+		tableModel = new DefaultTableModel(columNames, 0) {
+			
+			// Agregamos este método para que las filas no se puedan editar con doble clic
+			public boolean isCellEditable(int row, int column) {
+				return false; 
+			}
+		};
 		
 		contactTable = new JTable(tableModel);
 		scrollPane = new JScrollPane(contactTable);
@@ -147,6 +156,8 @@ public class Window extends JFrame{
 		
 		fileMenu.add(open);
 		fileMenu.add(save);
+		
+		
 	}
 	
 	
@@ -160,6 +171,12 @@ public class Window extends JFrame{
 		editButton.addActionListener(handler);
 		deleteButton.addActionListener(handler);
 		
+	}
+	
+	public void updateRow(String name, String tel ) {
+		tableModel.setValueAt(name, selectedRow, 0);
+		tableModel.setValueAt(tel, selectedRow, 1);
+		selectedRow = -1;
 	}
 
 	// Generamos los getter and setters para acceder a los elementos de la ventana porque son privados
@@ -203,6 +220,9 @@ public class Window extends JFrame{
 		this.tableModel = tableModel;
 	}
 
+	public int getRowSelected() {
+		return contactTable.getSelectedRow();
+	}
 	
 	
 	

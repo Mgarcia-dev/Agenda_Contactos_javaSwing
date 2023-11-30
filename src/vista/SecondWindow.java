@@ -23,6 +23,10 @@ public class SecondWindow extends JDialog{
 	private JTextField nameContent, telContent;
 	private EventHandler eHand;
 	
+
+
+
+
 	public SecondWindow(EventHandler eHand) {
 		this.eHand = eHand;
 		
@@ -35,7 +39,11 @@ public class SecondWindow extends JDialog{
 		contentPanel.setBackground(Color.white);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPanel.setLayout(null);
+		initVars();
+	}
 		
+		
+		private void initVars() {
 		// Se añade el Boton OK a la ventana y el controlador del botón
 		// Si pulsamos OK, los datos se añaden a la tabla
 		okButton = new JButton("OK");
@@ -66,7 +74,9 @@ public class SecondWindow extends JDialog{
 		telContent = new JTextField();
 		telContent.setBounds(130, 100, 150, 20);
 		contentPanel.add(telContent);
+		
 	}
+	
 	
 
 
@@ -115,7 +125,12 @@ public class SecondWindow extends JDialog{
 		
 		
 	}
+	/*	
+	public void getNameToEdit(String name, String tel) {
+		nameContent.setText(name);
+		telContent.setText(tel);
 		
-	
+	}
+	*/
 	}
 

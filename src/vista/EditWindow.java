@@ -2,17 +2,20 @@ package vista;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
+import java.awt.Window;
 
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JLabel;
+
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 import controlador.EventHandler;
 
-public class EditWindow extends JDialog {
+import javax.swing.JLabel;
+
+public class EditWindow extends JDialog{
 	
 	private final JPanel contentPanel = new JPanel();
 	private JLabel name, telNumber;
@@ -20,6 +23,10 @@ public class EditWindow extends JDialog {
 	private JTextField nameContent, telContent;
 	private EventHandler eHand;
 	
+
+
+
+
 	public EditWindow(EventHandler eHand) {
 		this.eHand = eHand;
 		
@@ -32,7 +39,11 @@ public class EditWindow extends JDialog {
 		contentPanel.setBackground(Color.white);
 		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPanel.setLayout(null);
+		initVars();
+	}
 		
+		
+		private void initVars() {
 		// Se añade el Boton OK a la ventana y el controlador del botón
 		// Si pulsamos OK, los datos se añaden a la tabla
 		okButton = new JButton("OK");
@@ -63,8 +74,21 @@ public class EditWindow extends JDialog {
 		telContent = new JTextField();
 		telContent.setBounds(130, 100, 150, 20);
 		contentPanel.add(telContent);
+		
+	}
+	
+	
+
+
+	public JLabel getTelNumber() {
+		return telNumber;
 	}
 
+	public void setlisteners (EventHandler eHand) {
+		okButton.addActionListener(eHand);
+		
+	}
+	
 	public JButton getOkButton() {
 		return okButton;
 	}
@@ -96,6 +120,16 @@ public class EditWindow extends JDialog {
 	public void setTelContent(JTextField telContent) {
 		this.telContent = telContent;
 	}
+
+	public void getNameContent(String columnName) {
+		
+		
+	}
+
+
+	public void getNameToEdit(String name, String tel) {
+	nameContent.setText(name);
+	telContent.setText(tel);
+	
+	}
 }
-
-

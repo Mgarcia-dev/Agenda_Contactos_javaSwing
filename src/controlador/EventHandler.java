@@ -2,12 +2,12 @@ package controlador;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.io.IOException;
+
 
 import javax.swing.JOptionPane;
-import javax.swing.JTextField;
+
 import javax.swing.table.DefaultTableModel;
+
 
 import vista.EditWindow;
 import vista.SecondWindow;
@@ -18,6 +18,8 @@ public class EventHandler implements ActionListener {
 	private Window window;
 	private SecondWindow window2;
 	private EditWindow window3;
+	
+	
 	
 	// Constructor de la clase
 	public EventHandler(Window window) {
@@ -48,23 +50,36 @@ public class EventHandler implements ActionListener {
 		// contacto seleccionado
 	//try {
 		if(e.getSource() == window.getEditButton()) {
+			window3 = new EditWindow(this);
 			try {
-				window3 = new EditWindow(this);
+				int selectedRow = window.contactTable.getSelectedRow();
+				//String nameEdited = window3.getNameContent().getText();
+				//String telEdited = window3.getTelContent().getText();
+				
+				
 				
 			if (window.contactTable.getSelectedRow() == -1 && window.getTableModel().getRowCount() == 0){
-					JOptionPane.showMessageDialog(window, "No hay contactos para editar", "Aviso", JOptionPane.INFORMATION_MESSAGE);
-					window3.setVisible(false);
+				JOptionPane.showMessageDialog(window, "No hay contactos para editar", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+				window3.setVisible(false);
 					
-				}else if (window.contactTable.getSelectedRow() == -1 && window.getTableModel().getRowCount() >= 0) {
-					JOptionPane.showMessageDialog(window, "Por favor, selecciona un contacto para editar", "Aviso", JOptionPane.INFORMATION_MESSAGE);
-					window3.setVisible(false);
+			}else if (window.contactTable.getSelectedRow() == -1 && window.getTableModel().getRowCount() >= 0) {
+				JOptionPane.showMessageDialog(window, "Por favor, selecciona un contacto para editar", "Aviso", JOptionPane.INFORMATION_MESSAGE);
+				window3.setVisible(false);
 					
-				}else{
+			}else{
+				window3.setTitle("Editar contacto");
+				window3.getNameToEdit(window.tableModel.getValueAt(selectedRow, 0).toString(), window.tableModel.getValueAt(selectedRow, 1).toString());
+				window3.setVisible(true);
+				
+					//DefaultTableModel tableModel = window.getTableModel();
+					//tableModel = window.getTableModel();
+					//tableModel.setValueAt(nameEdited, rowSelected, 0);
+					//tableModel.setValueAt(telEdited, rowSelected, 1);
 					
-					window3.setTitle("Editar contacto");
-					window3.setVisible(true);
-					//window3.getNameContent((String) window.tableModel.getValueAt(window.contactTable.getSelectedRow(), 0));
-			}
+					
+					//window3.getNameContent((String) window.tableModel.getValueAt(window.contactTable.getSelectedColumn(), 0));
+					
+				}
 			} catch (ArrayIndexOutOfBoundsException ioe) {
 				ioe.printStackTrace();
 			} catch(NullPointerException npe) {
@@ -108,7 +123,6 @@ public class EventHandler implements ActionListener {
 		// ventana principal
 		// Accion al pulsar el botok OK de la ventana secundaria
 	if(e.getSource() == window2.getOkButton()) {
-		
 		try {
 			if (window2.getNameContent().getText().isEmpty() && window2.getTelContent().getText().isEmpty()) {
 				JOptionPane.showMessageDialog(window, "Los datos del contacto están vacíos", "Aviso", JOptionPane.INFORMATION_MESSAGE);
@@ -130,35 +144,36 @@ public class EventHandler implements ActionListener {
 		}
 	}
 	
-	if(e.getSource() == window3.getOkButton()) {
+	// Si pulsamos cancelar, la ventana se cierra
+			if(e.getSource() == window2.getCancelButton()) {
+				window2.dispose();
+			}
+	
 			
+			
+	if(e.getSource() == window3.getOkButton()) {
+		
 		try {
 			if (window3.getNameContent().getText().isEmpty() && window3.getTelContent().getText().isEmpty()) {
 				JOptionPane.showMessageDialog(window, "Los datos del contacto están vacíos", "Aviso", JOptionPane.INFORMATION_MESSAGE);
 					
 			} else if (window3.getTelContent().getText().isEmpty()) {
 			JOptionPane.showMessageDialog(window, "Teléfono de contacto vacío", "Aviso", JOptionPane.INFORMATION_MESSAGE);
-				
-				
 					
 			}else if(window3.getNameContent().getText().isEmpty()) {
 				JOptionPane.showMessageDialog(window, "Nombre de contacto vacío", "Aviso", JOptionPane.INFORMATION_MESSAGE);
 					
-			} else if (window3.getNameContent().getText() != "") {
-				window.getTableModel().addRow(new String [] {window3.getNameContent().getText(), window3.getTelContent().getText()});
+			} else if (window3.getNameContent().getText() != "" && window3.getTelContent().getText() != "") {
+				window.contactTable.getSelectedRow(window3.getNameContent().getText());
+				window.updateRow(window3.getNameContent().getText(), window3.getTelContent().getText());
 				window3.dispose();
 			} 
 		} catch (NullPointerException npe) {
 			npe.printStackTrace();
 		}
-			
 	}
 	
-	
-		// Si pulsamos cancelar, la ventana se cierra
-		if(e.getSource() == window2.getCancelButton()) {
-			window2.dispose();
-		}
+		
 		if(e.getSource() == window3.getCancelButton()) {
 			window3.dispose();
 		}
